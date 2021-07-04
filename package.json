@@ -1,0 +1,23 @@
+{
+  "name": "vtrade-params",
+  "version": "1.0.0",
+  "description": "灵活的参数组合器",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test  --recursive"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leedow/vtrade-params.git"
+  },
+  "keywords": [
+    "vtrade",
+    "params"
+  ],
+  "author": "leedow",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/leedow/vtrade-params/issues"
+  },
+  "homepage": "https://github.com/leedow/vtrade-params#readme"
+}
