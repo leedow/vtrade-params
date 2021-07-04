@@ -25,7 +25,7 @@ module.exports = class Params {
 	 * 符合返回符合的参数组合，'-'类型通配符，属性返回null
 	 * 不符合则返回false
 	 */
-	match(rule, params) {
+	match(rule, params, replace=null) {
 		let res = []
 
 		for (let i = 0; i < params.length; i++) {
@@ -35,7 +35,7 @@ module.exports = class Params {
 			if(ruleParam == '*') {
 				res.push(param)
 			} else if(ruleParam == '-'){
-				res.push(null)
+				res.push(replace)
 			} else {
 				if(ruleParam == param) {
 					res.push(param)
@@ -45,17 +45,28 @@ module.exports = class Params {
 				}
 			}
 		}
-		
+
 		return res
 	}
 
-	result() {
+	/*
+	 * @replace ‘-’匹配符的占位符
+	 */
+	result(replace=null) {
 		if(this._rule) {
 			let res = []
 
 			this.all.forEach(one => {
-
+				let match = this.match(this._rule, one, replace)
+				if(
+					match &&
+					!res.find(item => this.match(item, match))
+				) {
+					res.push(match)
+				}
 			})
+
+			return res
 
 		} else {
 			return this.all

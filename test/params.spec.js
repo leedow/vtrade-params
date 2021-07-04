@@ -43,4 +43,39 @@ describe('测试',function(){
 		assert.deepEqual( params.match(['1', '-', '*'], [1, 2, 3]), [1, null, 3])
 	})
 
+	it('match6',function(){
+		assert.deepEqual( params.match(['1', '-', '*'], [1, 2, 3], '*'), [1, '*', 3])
+	})
+
+	it('result1',function(){
+		assert.deepEqual( params.rule([1,4,7, '*']).result(), [
+			[1,4,7,10],
+			[1,4,7,11]
+		])
+	})
+
+	it('result2',function(){
+		assert.deepEqual( params.rule(['-','-','*', '*']).result(), [
+			[null,null,7,10],
+			[null,null,7,11],
+			[null,null,8,10],
+			[null,null,8,11]
+		])
+	})
+
+	it('result3',function(){
+		assert.deepEqual( params.rule(['-','-','7', '10']).result('*'), [
+			['*','*',7,10]
+		])
+	})
+
+	it('result4',function(){
+		assert.deepEqual( params.rule(['*','*','7', '10']).result('*'), [
+			[1,4,7,10],
+			[1,5,7,10],
+			[2,4,7,10],
+			[2,5,7,10]
+		])
+	})
+
 })
